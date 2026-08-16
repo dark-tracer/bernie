@@ -44,7 +44,7 @@ function useTypewriter() {
     let timer: ReturnType<typeof setTimeout>;
 
     const tick = () => {
-      const current = roles[roleIndex];
+      const current = roles[roleIndex] ?? "";
       let speed: number;
 
       if (deleting) {
