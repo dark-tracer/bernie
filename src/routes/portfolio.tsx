@@ -23,7 +23,7 @@ export const Route = createFileRoute("/portfolio")({
       { name: "twitter:image", content: projects[0].image },
     ],
   }),
-  component: Portfolio;
+  component: Portfolio,
 });
 
 function Portfolio() {
