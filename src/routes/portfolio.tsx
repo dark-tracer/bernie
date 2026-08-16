@@ -19,11 +19,11 @@ export const Route = createFileRoute("/portfolio")({
         property: "og:description",
         content: "Branding, digital product design and creative direction case studies.",
       },
-      { property: "og:image", content: projects[0].image },
-      { name: "twitter:image", content: projects[0].image },
+      { property: "og:image", content: projects[0]!.image },
+      { name: "twitter:image", content: projects[0]!.image },
     ],
   }),
-  component: Portfolio;
+  component: Portfolio,
 });
 
 function Portfolio() {
