@@ -73,13 +73,7 @@ function Services() {
               <h2 className="font-headline text-headline-md mb-4 text-on-surface group-hover:text-primary transition-colors">
                 {s.title}
               </h2>
-              <p className="text-body-md text-on-surface-variant mb-8 flex-grow">{s.body}</p>
-              <button
-                type="button"
-                className="self-start border border-outline text-on-surface px-6 py-2 rounded-lg hover:bg-on-surface hover:text-background transition-colors text-body-md font-medium"
-              >
-                Get a Quote
-              </button>
+              <p className="text-body-md text-on-surface-variant flex-grow">{s.body}</p>
             </div>
           ))}
         </div>
