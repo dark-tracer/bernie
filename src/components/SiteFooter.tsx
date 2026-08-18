@@ -6,7 +6,7 @@ export function SiteFooter() {
           Bernie Amponsah
         </div>
         <nav className="flex flex-wrap justify-center gap-6">
-          {["Privacy Policy", "Terms of Service", "LinkedIn", "Dribbble"].map((l) => (
+          {["Privacy Policy", "Terms of Service", "LinkedIn"].map((l) => (
             <a
               key={l}
               href="#"
