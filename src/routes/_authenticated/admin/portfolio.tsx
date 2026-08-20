@@ -51,7 +51,7 @@ function PortfolioManager() {
             options: ["Branding", "UI/UX", "Print", "Social", "Digital"],
           },
           { name: "client", label: "Client" },
-          { name: "image_url", label: "Image URL" },
+          { name: "image_url", label: "Image", type: "image" as const },
           { name: "alt_text", label: "Image alt text" },
           { name: "summary", label: "Summary", type: "textarea" },
           { name: "content", label: "Case study (one paragraph per line)", type: "textarea" },
