@@ -3,8 +3,10 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Icon } from "@/components/Icon";
 import { portraitImage } from "@/data/site";
+import { getSiteSettings } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/about")({
+  loader: () => getSiteSettings(),
   head: () => ({
     meta: [
       { title: "About Bernie Amponsah — UI/UX Strategist" },
@@ -22,25 +24,50 @@ export const Route = createFileRoute("/about")({
       { name: "twitter:image", content: portraitImage },
     ],
   }),
+  errorComponent: () => <p className="p-10 text-on-surface">Could not load this page.</p>,
+  notFoundComponent: () => <p className="p-10 text-on-surface">Page not found.</p>,
   component: About,
 });
 
-const stats = [
-  { icon: "schedule", value: "4+", label: "Years Experience" },
-  { icon: "handshake", value: "10+", label: "Global Clients" },
-  { icon: "view_carousel", value: "50+", label: "Monthly Assets" },
-];
+const statIcons = ["schedule", "handshake", "view_carousel"];
 
-const tools = [
-  "Adobe Photoshop",
-  "Figma",
-  "Canva",
-  "Meta Business Suite",
-  "Google Analytics",
-  "GIMP",
-];
+const fallbackStats = "4+ | Years Experience\n10+ | Global Clients\n50+ | Monthly Assets";
+const fallbackTools = "Adobe Photoshop, Figma, Canva, Meta Business Suite, Google Analytics, GIMP";
 
 function About() {
+  const settings = (Route.useLoaderData() ?? {}) as Record<string, string | null>;
+
+  const portrait = settings["portrait_url"] || portraitImage;
+  const heading = settings["about_heading"] || "Crafting Digital Experiences.";
+  const body =
+    settings["about_body"] ||
+    "I am Bernie Amponsah, a UI/UX strategist dedicated to merging technical precision with creative authority.";
+  const cvUrl = settings["cv_url"] || "";
+  const toolsHeading = settings["about_tools_heading"] || "Tools of the Trade";
+  const toolsIntro =
+    settings["about_tools_intro"] ||
+    "Proficient in industry-standard software to deliver high-fidelity prototypes, seamless wireframes, and data-driven analytical insights.";
+  const tools = (settings["about_tools"] || fallbackTools)
+    .split(",")
+    .map((t) => t.trim())
+    .filter(Boolean);
+  const stats = (settings["about_stats"] || fallbackStats)
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, i) => {
+      const [value, label] = line.split("|");
+      return {
+        value: (value ?? "").trim(),
+        label: (label ?? "").trim(),
+        icon: statIcons[i % statIcons.length] as string,
+      };
+    });
+
+  const headingWords = heading.trim().split(" ");
+  const lastWord = headingWords.length > 1 ? headingWords.pop()! : "";
+  const leadWords = headingWords.join(" ");
+
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden">
       <SiteNav />
@@ -49,7 +76,7 @@ function About() {
         <section className="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap items-center pt-10">
           <div className="md:col-span-5 h-[500px] md:h-[700px] relative rounded-xl overflow-hidden group">
             <img
-              src={portraitImage}
+              src={portrait}
               alt="Portrait of Bernie Amponsah, UI/UX strategist, in cinematic lighting"
               className="object-cover w-full h-full absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105"
             />
@@ -59,57 +86,58 @@ function About() {
 
           <div className="md:col-span-7 flex flex-col justify-center pl-0 md:pl-10 mt-10 md:mt-0">
             <h1 className="font-display text-headline-lg-mobile md:text-display text-on-surface mb-6 leading-tight">
-              Crafting Digital
-              <br />
-              <span className="text-primary">Experiences.</span>
+              {leadWords}
+              {lastWord && (
+                <>
+                  <br />
+                  <span className="text-primary">{lastWord}</span>
+                </>
+              )}
             </h1>
-            <p className="text-body-lg text-on-surface-variant mb-8 max-w-2xl">
-              I am Bernie Amponsah, a UI/UX strategist dedicated to merging technical precision with
-              creative authority. I don't just design interfaces; I architect systems that solve
-              complex problems through high-contrast, structural modernism. My philosophy centers on
-              heavy whitespace—what I call "dark space"—to allow the work to speak for itself.
+            <p className="text-body-lg text-on-surface-variant mb-8 max-w-2xl whitespace-pre-line">
+              {body}
             </p>
-            <div className="flex items-center space-x-6">
-              <button
-                type="button"
-                className="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors flex items-center space-x-2"
-              >
-                <span>Download CV</span>
-                <Icon name="download" />
-              </button>
-            </div>
+            {cvUrl && (
+              <div className="flex items-center space-x-6">
+                <a
+                  href={cvUrl}
+                  download
+                  className="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-bold hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors flex items-center space-x-2"
+                >
+                  <span>Download CV</span>
+                  <Icon name="download" />
+                </a>
+              </div>
+            )}
           </div>
         </section>
 
-        <section className="mb-section-gap">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stats.map((s) => (
-              <div
-                key={s.label}
-                className="bg-surface border border-outline-variant rounded-xl p-8 hover:shadow-[0_20px_40px_rgba(26,86,219,0.1)] transition-shadow duration-300"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <Icon name={s.icon} className="text-primary text-4xl" />
+        {stats.length > 0 && (
+          <section className="mb-section-gap">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {stats.map((s) => (
+                <div
+                  key={s.label || s.value}
+                  className="bg-surface border border-outline-variant rounded-xl p-8 hover:shadow-[0_20px_40px_rgba(26,86,219,0.1)] transition-shadow duration-300"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <Icon name={s.icon} className="text-primary text-4xl" />
+                  </div>
+                  <h3 className="font-headline text-headline-lg text-on-surface mb-2">{s.value}</h3>
+                  <p className="text-label-caps text-on-surface-variant uppercase tracking-widest">
+                    {s.label}
+                  </p>
                 </div>
-                <h3 className="font-headline text-headline-lg text-on-surface mb-2">{s.value}</h3>
-                <p className="text-label-caps text-on-surface-variant uppercase tracking-widest">
-                  {s.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section>
           <div className="mb-12">
-            <h2 className="font-headline text-headline-md text-on-surface mb-2">
-              Tools of the Trade
-            </h2>
+            <h2 className="font-headline text-headline-md text-on-surface mb-2">{toolsHeading}</h2>
             <div className="w-16 h-1 bg-primary mb-6" />
-            <p className="text-body-lg text-on-surface-variant max-w-xl">
-              Proficient in industry-standard software to deliver high-fidelity prototypes, seamless
-              wireframes, and data-driven analytical insights.
-            </p>
+            <p className="text-body-lg text-on-surface-variant max-w-xl">{toolsIntro}</p>
           </div>
           <div className="flex flex-wrap gap-4">
             {tools.map((t) => (
