@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { toast } from "sonner";
@@ -43,6 +43,12 @@ export function AdminCrud({
   const queryClient = useQueryClient();
   const queryKey = useMemo(() => ["admin", table], [table]);
   const [editing, setEditing] = useState<Row | null>(createOpen ? { ...defaults } : null);
+  const defaultsRef = useRef(defaults);
+  defaultsRef.current = defaults;
+
+  useEffect(() => {
+    if (createOpen) setEditing((current) => current ?? { ...defaultsRef.current });
+  }, [createOpen]);
 
   const { data: rows = [], isLoading } = useQuery({
     queryKey,
