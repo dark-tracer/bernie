@@ -115,10 +115,17 @@ export type Database = {
       }
       site_settings: {
         Row: {
+          about_body: string
+          about_heading: string
+          about_stats: string
+          about_tools: string
+          about_tools_heading: string
+          about_tools_intro: string
           availability_note: string
           avatar_url: string | null
           behance_url: string
           bio: string
+          cv_url: string
           email: string
           full_name: string
           id: boolean
@@ -126,14 +133,22 @@ export type Database = {
           linkedin_url: string
           location: string
           phone: string
+          portrait_url: string
           tagline: string
           updated_at: string
         }
         Insert: {
+          about_body?: string
+          about_heading?: string
+          about_stats?: string
+          about_tools?: string
+          about_tools_heading?: string
+          about_tools_intro?: string
           availability_note?: string
           avatar_url?: string | null
           behance_url?: string
           bio?: string
+          cv_url?: string
           email?: string
           full_name?: string
           id?: boolean
@@ -141,14 +156,22 @@ export type Database = {
           linkedin_url?: string
           location?: string
           phone?: string
+          portrait_url?: string
           tagline?: string
           updated_at?: string
         }
         Update: {
+          about_body?: string
+          about_heading?: string
+          about_stats?: string
+          about_tools?: string
+          about_tools_heading?: string
+          about_tools_intro?: string
           availability_note?: string
           avatar_url?: string | null
           behance_url?: string
           bio?: string
+          cv_url?: string
           email?: string
           full_name?: string
           id?: boolean
@@ -156,6 +179,7 @@ export type Database = {
           linkedin_url?: string
           location?: string
           phone?: string
+          portrait_url?: string
           tagline?: string
           updated_at?: string
         }
