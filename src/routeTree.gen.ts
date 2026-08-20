@@ -20,6 +20,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as PortfolioIndexRouteImport } from './routes/portfolio.index'
 import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminAboutRouteImport } from './routes/_authenticated/admin/about'
 import { Route as AuthenticatedAdminBlogRouteImport } from './routes/_authenticated/admin/blog'
 import { Route as AuthenticatedAdminPortfolioRouteImport } from './routes/_authenticated/admin/portfolio'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
@@ -81,6 +82,11 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminAboutRoute = AuthenticatedAdminAboutRouteImport.update({
+  id: '/admin/about',
+  path: '/admin/about',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdminBlogRoute = AuthenticatedAdminBlogRouteImport.update({
   id: '/admin/blog',
   path: '/admin/blog',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
+  '/admin/about': typeof AuthenticatedAdminAboutRoute
   '/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/admin/portfolio': typeof AuthenticatedAdminPortfolioRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/blog': typeof BlogIndexRoute
   '/portfolio': typeof PortfolioIndexRoute
+  '/admin/about': typeof AuthenticatedAdminAboutRoute
   '/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/admin/portfolio': typeof AuthenticatedAdminPortfolioRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
@@ -164,6 +172,7 @@ export interface FileRoutesById {
   '/portfolio/$slug': typeof PortfolioSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/portfolio/': typeof PortfolioIndexRoute
+  '/_authenticated/admin/about': typeof AuthenticatedAdminAboutRoute
   '/_authenticated/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/_authenticated/admin/portfolio': typeof AuthenticatedAdminPortfolioRoute
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/portfolio/$slug'
     | '/blog/'
     | '/portfolio/'
+    | '/admin/about'
     | '/admin/blog'
     | '/admin/portfolio'
     | '/admin/settings'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/portfolio/$slug'
     | '/blog'
     | '/portfolio'
+    | '/admin/about'
     | '/admin/blog'
     | '/admin/portfolio'
     | '/admin/settings'
@@ -221,6 +232,7 @@ export interface FileRouteTypes {
     | '/portfolio/$slug'
     | '/blog/'
     | '/portfolio/'
+    | '/_authenticated/admin/about'
     | '/_authenticated/admin/blog'
     | '/_authenticated/admin/portfolio'
     | '/_authenticated/admin/settings'
@@ -323,6 +335,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/about': {
+      id: '/_authenticated/admin/about'
+      path: '/admin/about'
+      fullPath: '/admin/about'
+      preLoaderRoute: typeof AuthenticatedAdminAboutRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/blog': {
       id: '/_authenticated/admin/blog'
       path: '/admin/blog'
@@ -369,6 +388,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminAboutRoute: typeof AuthenticatedAdminAboutRoute
   AuthenticatedAdminBlogRoute: typeof AuthenticatedAdminBlogRoute
   AuthenticatedAdminPortfolioRoute: typeof AuthenticatedAdminPortfolioRoute
   AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
@@ -378,6 +398,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminAboutRoute: AuthenticatedAdminAboutRoute,
   AuthenticatedAdminBlogRoute: AuthenticatedAdminBlogRoute,
   AuthenticatedAdminPortfolioRoute: AuthenticatedAdminPortfolioRoute,
   AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
