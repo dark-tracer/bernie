@@ -42,7 +42,7 @@ function BlogManager() {
           { name: "category", label: "Category" },
           { name: "excerpt", label: "Excerpt", type: "textarea" },
           { name: "content", label: "Article (one paragraph per line)", type: "textarea" },
-          { name: "image_url", label: "Cover image URL" },
+          { name: "image_url", label: "Cover image", type: "image" as const },
           { name: "alt_text", label: "Image alt text" },
           { name: "read_time", label: "Read time" },
           { name: "published_on", label: "Publish date", type: "date" },

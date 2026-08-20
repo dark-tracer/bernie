@@ -4,6 +4,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Icon } from "./Icon";
+import { UploadField } from "./UploadField";
 import { slugify } from "@/lib/slugify";
 
 const db = supabase as unknown as SupabaseClient;
@@ -11,7 +12,7 @@ const db = supabase as unknown as SupabaseClient;
 export type Field = {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "select" | "number" | "checkbox" | "date" | "url";
+  type?: "text" | "textarea" | "select" | "number" | "checkbox" | "date" | "url" | "image" | "file";
   options?: string[];
   placeholder?: string;
   slugFrom?: string;
@@ -245,7 +246,15 @@ function EntityDialog({
                 >
                   {field.label}
                 </label>
-                {field.type === "textarea" ? (
+                {field.type === "image" || field.type === "file" ? (
+                  <UploadField
+                    id={field.name}
+                    kind={field.type}
+                    accept={field.type === "image" ? "image/*" : ".pdf,.doc,.docx"}
+                    value={String(value ?? "")}
+                    onChange={(url) => set(field.name, url)}
+                  />
+                ) : field.type === "textarea" ? (
                   <textarea
                     id={field.name}
                     rows={5}

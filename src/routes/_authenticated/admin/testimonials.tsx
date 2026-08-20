@@ -28,7 +28,7 @@ function TestimonialsManager() {
           { name: "name", label: "Client name" },
           { name: "role", label: "Role / company" },
           { name: "quote", label: "Quote", type: "textarea" },
-          { name: "image_url", label: "Portrait image URL" },
+          { name: "image_url", label: "Portrait image", type: "image" as const },
           { name: "sort_order", label: "Sort order", type: "number" },
         ]}
         columns={[

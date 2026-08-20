@@ -121,7 +121,7 @@ function Home() {
         <section className="w-full border-y border-outline-variant/20 py-8 bg-surface-container-lowest overflow-hidden">
           <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-4">
             <p className="text-label-caps text-on-surface-variant text-center uppercase tracking-widest">
-              Trusted By
+              Worked With
             </p>
           </div>
           <div className="relative w-full flex overflow-hidden">
