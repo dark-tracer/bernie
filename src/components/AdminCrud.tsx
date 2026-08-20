@@ -43,6 +43,12 @@ export function AdminCrud({
   const queryClient = useQueryClient();
   const queryKey = useMemo(() => ["admin", table], [table]);
   const [editing, setEditing] = useState<Row | null>(createOpen ? { ...defaults } : null);
+  const defaultsRef = useRef(defaults);
+  defaultsRef.current = defaults;
+
+  useEffect(() => {
+    if (createOpen) setEditing((current) => current ?? { ...defaultsRef.current });
+  }, [createOpen]);
 
   const { data: rows = [], isLoading } = useQuery({
     queryKey,
