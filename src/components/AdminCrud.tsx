@@ -4,6 +4,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Icon } from "./Icon";
+import { UploadField } from "./UploadField";
 import { slugify } from "@/lib/slugify";
 
 const db = supabase as unknown as SupabaseClient;
