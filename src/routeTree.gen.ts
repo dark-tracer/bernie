@@ -22,6 +22,7 @@ import { Route as PortfolioSlugRouteImport } from './routes/portfolio.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminBlogRouteImport } from './routes/_authenticated/admin/blog'
 import { Route as AuthenticatedAdminPortfolioRouteImport } from './routes/_authenticated/admin/portfolio'
+import { Route as AuthenticatedAdminSubmissionsRouteImport } from './routes/_authenticated/admin/submissions'
 import { Route as AuthenticatedAdminTestimonialsRouteImport } from './routes/_authenticated/admin/testimonials'
 
 const IndexRoute = IndexRouteImport.update({
@@ -89,6 +90,12 @@ const AuthenticatedAdminPortfolioRoute =
     path: '/admin/portfolio',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminSubmissionsRoute =
+  AuthenticatedAdminSubmissionsRouteImport.update({
+    id: '/admin/submissions',
+    path: '/admin/submissions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminTestimonialsRoute =
   AuthenticatedAdminTestimonialsRouteImport.update({
     id: '/admin/testimonials',
@@ -108,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/portfolio/': typeof PortfolioIndexRoute
   '/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/admin/portfolio': typeof AuthenticatedAdminPortfolioRoute
+  '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
   '/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -123,6 +131,7 @@ export interface FileRoutesByTo {
   '/portfolio': typeof PortfolioIndexRoute
   '/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/admin/portfolio': typeof AuthenticatedAdminPortfolioRoute
+  '/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
   '/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
@@ -140,6 +149,7 @@ export interface FileRoutesById {
   '/portfolio/': typeof PortfolioIndexRoute
   '/_authenticated/admin/blog': typeof AuthenticatedAdminBlogRoute
   '/_authenticated/admin/portfolio': typeof AuthenticatedAdminPortfolioRoute
+  '/_authenticated/admin/submissions': typeof AuthenticatedAdminSubmissionsRoute
   '/_authenticated/admin/testimonials': typeof AuthenticatedAdminTestimonialsRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/portfolio/'
     | '/admin/blog'
     | '/admin/portfolio'
+    | '/admin/submissions'
     | '/admin/testimonials'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/admin/blog'
     | '/admin/portfolio'
+    | '/admin/submissions'
     | '/admin/testimonials'
     | '/admin'
   id:
@@ -188,6 +200,7 @@ export interface FileRouteTypes {
     | '/portfolio/'
     | '/_authenticated/admin/blog'
     | '/_authenticated/admin/portfolio'
+    | '/_authenticated/admin/submissions'
     | '/_authenticated/admin/testimonials'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
@@ -298,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPortfolioRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/submissions': {
+      id: '/_authenticated/admin/submissions'
+      path: '/admin/submissions'
+      fullPath: '/admin/submissions'
+      preLoaderRoute: typeof AuthenticatedAdminSubmissionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/testimonials': {
       id: '/_authenticated/admin/testimonials'
       path: '/admin/testimonials'
@@ -311,6 +331,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminBlogRoute: typeof AuthenticatedAdminBlogRoute
   AuthenticatedAdminPortfolioRoute: typeof AuthenticatedAdminPortfolioRoute
+  AuthenticatedAdminSubmissionsRoute: typeof AuthenticatedAdminSubmissionsRoute
   AuthenticatedAdminTestimonialsRoute: typeof AuthenticatedAdminTestimonialsRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
@@ -318,6 +339,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminBlogRoute: AuthenticatedAdminBlogRoute,
   AuthenticatedAdminPortfolioRoute: AuthenticatedAdminPortfolioRoute,
+  AuthenticatedAdminSubmissionsRoute: AuthenticatedAdminSubmissionsRoute,
   AuthenticatedAdminTestimonialsRoute: AuthenticatedAdminTestimonialsRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
