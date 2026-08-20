@@ -245,7 +245,15 @@ function EntityDialog({
                 >
                   {field.label}
                 </label>
-                {field.type === "textarea" ? (
+                {field.type === "image" || field.type === "file" ? (
+                  <UploadField
+                    id={field.name}
+                    kind={field.type}
+                    accept={field.type === "image" ? "image/*" : ".pdf,.doc,.docx"}
+                    value={String(value ?? "")}
+                    onChange={(url) => set(field.name, url)}
+                  />
+                ) : field.type === "textarea" ? (
                   <textarea
                     id={field.name}
                     rows={5}
