@@ -11,7 +11,7 @@ const db = supabase as unknown as SupabaseClient;
 export type Field = {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "select" | "number" | "checkbox" | "date" | "url";
+  type?: "text" | "textarea" | "select" | "number" | "checkbox" | "date" | "url" | "image" | "file";
   options?: string[];
   placeholder?: string;
   slugFrom?: string;
