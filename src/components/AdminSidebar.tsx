@@ -8,6 +8,7 @@ const items = [
   { to: "/admin/portfolio", label: "Portfolio", icon: "folder_open", exact: false },
   { to: "/admin/blog", label: "Blog", icon: "edit_note", exact: false },
   { to: "/admin/testimonials", label: "Testimonials", icon: "chat_bubble", exact: false },
+  { to: "/admin/about", label: "About Page", icon: "person", exact: false },
   { to: "/admin/submissions", label: "Submissions", icon: "inbox", exact: false },
   { to: "/admin/settings", label: "Settings", icon: "settings", exact: false },
 ] as const;
