@@ -123,7 +123,7 @@ function About() {
                   <div className="flex items-center justify-between mb-4">
                     <Icon name={s.icon} className="text-primary text-4xl" />
                   </div>
-                  <h3 className="font-headline text-headline-lg text-on-surface mb-2">{s.value}</h3>
+                  <p className="font-headline text-headline-lg text-on-surface mb-2">{s.value}</p>
                   <p className="text-label-caps text-on-surface-variant uppercase tracking-widest">
                     {s.label}
                   </p>

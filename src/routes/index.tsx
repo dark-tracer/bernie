@@ -90,7 +90,7 @@ function Home() {
 
           <div className="z-10 max-w-4xl mx-auto flex flex-col items-center gap-8">
             <h1 className="font-display text-headline-lg-mobile md:text-display text-on-surface tracking-tighter">
-              Bernie Amponsah
+              Bernie Amponsah — UI/UX Designer &amp; Brand Strategist
             </h1>
             <div className="h-12 flex items-center justify-center">
               <span className="font-headline text-headline-md text-primary">{typed}</span>
