@@ -89,9 +89,9 @@ function Blog() {
                     />
                   )}
                   <div>
-                    <h3 className="font-headline text-body-md font-bold text-on-surface">
+                    <p className="font-headline text-body-md font-bold text-on-surface">
                       {t.name}
-                    </h3>
+                    </p>
                     <p className="text-label-caps text-on-surface-variant uppercase tracking-widest mt-1">
                       {t.role}
                     </p>
