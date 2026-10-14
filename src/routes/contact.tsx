@@ -10,6 +10,8 @@ export const Route = createFileRoute("/contact")({
   loader: () => getSiteSettings(),
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Contact Bernie Amponsah — Let's Connect" },
       {
         name: "description",

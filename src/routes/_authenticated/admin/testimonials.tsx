@@ -5,6 +5,8 @@ import { AdminCrud } from "@/components/AdminCrud";
 export const Route = createFileRoute("/_authenticated/admin/testimonials")({
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Testimonials Manager — Bernie Amponsah" },
       { name: "description", content: "Manage client testimonials shown on the site." },
       { property: "og:title", content: "Testimonials Manager — Bernie Amponsah" },

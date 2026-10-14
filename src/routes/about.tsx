@@ -7,8 +7,10 @@ import { getSiteSettings } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/about")({
   loader: () => getSiteSettings(),
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "About Bernie Amponsah — UI/UX Strategist" },
       {
         name: "description",
@@ -20,8 +22,10 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "Merging technical precision with creative authority in digital product design.",
       },
-      { property: "og:image", content: portraitImage },
-      { name: "twitter:image", content: portraitImage },
+      ...((loaderData?.portrait_url || portraitImage).startsWith("https://") ? [
+        { property: "og:image", content: loaderData?.portrait_url || portraitImage },
+        { name: "twitter:image", content: loaderData?.portrait_url || portraitImage },
+      ] : []),
     ],
   }),
   errorComponent: () => <p className="p-10 text-on-surface">Could not load this page.</p>,

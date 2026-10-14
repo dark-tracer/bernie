@@ -5,6 +5,8 @@ import { SettingsForm, type SettingsGroup } from "@/components/SettingsForm";
 export const Route = createFileRoute("/_authenticated/admin/settings")({
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Site Settings — Bernie Amponsah" },
       { name: "description", content: "Update contact details, bio and social links." },
       { property: "og:title", content: "Site Settings — Bernie Amponsah" },

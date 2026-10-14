@@ -3,6 +3,8 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Icon } from "@/components/Icon";
 import { getProject } from "@/lib/content.functions";
+import { ProjectSlideshow } from "@/components/ProjectSlideshow";
+import { projectImages } from "@/lib/project-images";
 
 export const Route = createFileRoute("/portfolio/$slug")({
   loader: async ({ params }) => {
@@ -22,7 +24,9 @@ export const Route = createFileRoute("/portfolio/$slug")({
         { name: "description", content: p.summary },
         { property: "og:title", content: title },
         { property: "og:description", content: p.summary },
-        ...(p.image_url
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+        ...(p.image_url?.startsWith("https://")
           ? [
               { property: "og:image", content: p.image_url },
               { name: "twitter:image", content: p.image_url },
@@ -79,12 +83,10 @@ function ProjectDetail() {
           <p className="text-body-lg text-on-surface-variant">{project.summary}</p>
         </header>
 
-        {project.image_url && (
-          <img
-            src={project.image_url}
-            alt={project.alt_text || project.title}
-            className="w-full rounded-xl border border-outline-variant/30 mb-16 object-cover max-h-[560px]"
-          />
+        {projectImages(project.image_url, project.gallery_images).length > 0 && (
+          <div className="w-full aspect-[4/3] md:aspect-[16/9] max-h-[560px] mb-16">
+            <ProjectSlideshow images={projectImages(project.image_url, project.gallery_images)} title={project.title} />
+          </div>
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-24">

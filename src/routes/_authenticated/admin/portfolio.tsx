@@ -8,6 +8,8 @@ export const Route = createFileRoute("/_authenticated/admin/portfolio")({
   }),
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Portfolio Manager — Bernie Amponsah" },
       { name: "description", content: "Create, edit and publish portfolio projects." },
       { property: "og:title", content: "Portfolio Manager — Bernie Amponsah" },
@@ -35,6 +37,7 @@ function PortfolioManager() {
           category: "UI/UX",
           client: "",
           image_url: "",
+          gallery_images: [],
           alt_text: "",
           summary: "",
           content: "",
@@ -51,7 +54,8 @@ function PortfolioManager() {
             options: ["Branding", "UI/UX", "Print", "Social", "Digital"],
           },
           { name: "client", label: "Client" },
-          { name: "image_url", label: "Image", type: "image" as const },
+          { name: "image_url", label: "Cover image", type: "image" as const },
+          { name: "gallery_images", label: "Slideshow images", type: "gallery" },
           { name: "alt_text", label: "Image alt text" },
           { name: "summary", label: "Summary", type: "textarea" },
           { name: "content", label: "Case study (one paragraph per line)", type: "textarea" },

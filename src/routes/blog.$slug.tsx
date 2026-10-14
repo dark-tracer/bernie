@@ -17,12 +17,13 @@ export const Route = createFileRoute("/blog/$slug")({
     const title = `${loaderData.title} — Bernie Amponsah`;
     return {
       meta: [
+      { name: "twitter:card", content: "summary_large_image" },
         { title },
         { name: "description", content: loaderData.excerpt },
         { property: "og:title", content: title },
         { property: "og:description", content: loaderData.excerpt },
         { property: "og:type", content: "article" },
-        ...(loaderData.image_url
+        ...(loaderData.image_url?.startsWith("https://")
           ? [
               { property: "og:image", content: loaderData.image_url },
               { name: "twitter:image", content: loaderData.image_url },

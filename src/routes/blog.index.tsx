@@ -13,6 +13,8 @@ export const Route = createFileRoute("/blog/")({
     const cover = loaderData?.posts.find((p) => p.featured)?.image_url ?? null;
     return {
       meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
         { title: "Insights & Client Perspectives — Bernie Amponsah" },
         {
           name: "description",
@@ -24,7 +26,7 @@ export const Route = createFileRoute("/blog/")({
           property: "og:description",
           content: "Articles on UI architecture and dark-mode design, plus client testimonials.",
         },
-        ...(cover
+        ...(cover?.startsWith("https://")
           ? [
               { property: "og:image", content: cover },
               { name: "twitter:image", content: cover },
