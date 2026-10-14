@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Icon } from "@/components/Icon";
+import { ProjectSlideshow } from "@/components/ProjectSlideshow";
+import { projectImages } from "@/lib/project-images";
 import { listProjects } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/portfolio/")({
@@ -22,7 +23,9 @@ export const Route = createFileRoute("/portfolio/")({
           property: "og:description",
           content: "Branding, digital product design and creative direction case studies.",
         },
-        ...(cover
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+        ...(cover?.startsWith("https://")
           ? [
               { property: "og:image", content: cover },
               { name: "twitter:image", content: cover },
@@ -75,43 +78,30 @@ function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
           {visible.map((p, i) => (
-            <Link
+            <article
               key={p.id}
-              to="/portfolio/$slug"
-              params={{ slug: p.slug }}
               className={`group relative overflow-hidden rounded-xl bg-surface border border-outline-variant/30 aspect-[4/5] flex flex-col ${
                 i >= 3 ? "lg:mt-12" : ""
               }`}
             >
-              <div className="flex-grow overflow-hidden relative">
-                {p.image_url ? (
-                  <img
-                    src={p.image_url}
-                    alt={p.alt_text || p.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-surface-container-high" />
-                )}
-                <div className="absolute inset-0 bg-background/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <span className="bg-primary-container text-on-primary-container px-8 py-3 rounded-full font-bold shadow-lg flex items-center gap-2">
-                    View Project <Icon name="arrow_forward" />
-                  </span>
-                </div>
+              <div className="flex-1 min-h-0 overflow-hidden relative">
+                <ProjectSlideshow images={projectImages(p.image_url, p.gallery_images)} title={p.title} compact />
               </div>
               <div className="p-6 bg-surface-container-low border-t border-outline-variant/30 z-10 relative">
                 <div className="flex justify-between items-start mb-2 gap-3">
                   <h2 className="font-headline text-[24px] font-bold text-on-surface leading-tight">
-                    {p.title}
+                    <Link to="/portfolio/$slug" params={{ slug: p.slug }}>{p.title}</Link>
                   </h2>
                   <span className="text-label-caps bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded whitespace-nowrap">
                     {p.category}
                   </span>
                 </div>
-                <p className="text-on-surface-variant text-sm">Client: {p.client}</p>
+                <div className="flex flex-wrap justify-between gap-2 text-sm">
+                  <p className="text-on-surface-variant">Client: {p.client}</p>
+                  <Link to="/portfolio/$slug" params={{ slug: p.slug }} className="text-primary hover:underline">View project →</Link>
+                </div>
               </div>
-            </Link>
+            </article>
           ))}
         </div>
       </main>

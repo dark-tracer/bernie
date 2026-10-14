@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Icon } from "./Icon";
 import { UploadField } from "./UploadField";
+import { GalleryUploadField } from "./GalleryUploadField";
 import { slugify } from "@/lib/slugify";
 
 const db = supabase as unknown as SupabaseClient;
@@ -12,7 +13,7 @@ const db = supabase as unknown as SupabaseClient;
 export type Field = {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "select" | "number" | "checkbox" | "date" | "url" | "image" | "file";
+  type?: "text" | "textarea" | "select" | "number" | "checkbox" | "date" | "url" | "image" | "file" | "gallery";
   options?: string[];
   placeholder?: string;
   slugFrom?: string;
@@ -212,6 +213,7 @@ function EntityDialog({
   onSave: (record: Row) => void;
 }) {
   const [draft, setDraft] = useState<Row>(record);
+  const [uploadingGallery, setUploadingGallery] = useState(false);
 
   function set(name: string, value: unknown) {
     setDraft((prev) => ({ ...prev, [name]: value }));
@@ -233,7 +235,7 @@ function EntityDialog({
           className="space-y-5"
           onSubmit={(e) => {
             e.preventDefault();
-            onSave(draft);
+            if (!uploadingGallery) onSave(draft);
           }}
         >
           {fields.map((field) => {
@@ -246,7 +248,9 @@ function EntityDialog({
                 >
                   {field.label}
                 </label>
-                {field.type === "image" || field.type === "file" ? (
+                {field.type === "gallery" ? (
+                  <GalleryUploadField id={field.name} value={Array.isArray(value) ? value as string[] : []} onChange={(images) => set(field.name, images)} onUploadingChange={setUploadingGallery} />
+                ) : field.type === "image" || field.type === "file" ? (
                   <UploadField
                     id={field.name}
                     kind={field.type}
@@ -315,7 +319,7 @@ function EntityDialog({
             </button>
             <button
               type="submit"
-              disabled={saving}
+              disabled={saving || uploadingGallery}
               className="px-6 py-3 rounded-lg bg-primary-container text-on-primary-container font-bold disabled:opacity-60"
             >
               {saving ? "Saving…" : "Save"}

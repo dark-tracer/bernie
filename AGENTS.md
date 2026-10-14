@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Project slideshows use the existing cover plus an ordered gallery_images array; use the shared Embla slideshow on listing and detail views so navigation and touch behavior stay consistent.
+- Gallery editing uses the existing admin-only media upload path and saves image order with the project, preserving the current publication and access rules.
