@@ -72,6 +72,7 @@ export type Database = {
           client: string
           content: string
           created_at: string
+          gallery_images: string[]
           id: string
           image_url: string | null
           slug: string
@@ -87,6 +88,7 @@ export type Database = {
           client?: string
           content?: string
           created_at?: string
+          gallery_images?: string[]
           id?: string
           image_url?: string | null
           slug: string
@@ -102,6 +104,7 @@ export type Database = {
           client?: string
           content?: string
           created_at?: string
+          gallery_images?: string[]
           id?: string
           image_url?: string | null
           slug?: string

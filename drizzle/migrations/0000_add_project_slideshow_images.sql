@@ -1,0 +1,1 @@
+ALTER TABLE public.projects ADD COLUMN gallery_images text[] NOT NULL DEFAULT '{}';
