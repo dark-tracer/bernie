@@ -8,6 +8,8 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/_authenticated/admin/submissions")({
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Inbox — Bernie Amponsah" },
       { name: "description", content: "Messages sent through the website contact form." },
       { property: "og:title", content: "Inbox — Bernie Amponsah" },

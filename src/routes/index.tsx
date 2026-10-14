@@ -7,6 +7,8 @@ import { Icon } from "@/components/Icon";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Bernie Amponsah | UI/UX Designer & Strategist" },
       {
         name: "description",

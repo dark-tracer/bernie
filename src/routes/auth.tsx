@@ -8,6 +8,8 @@ export const Route = createFileRoute("/auth")({
   ssr: false,
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Admin Sign In — Bernie Amponsah" },
       { name: "description", content: "Secure sign-in for the Bernie Amponsah studio dashboard." },
       { property: "og:title", content: "Admin Sign In — Bernie Amponsah" },

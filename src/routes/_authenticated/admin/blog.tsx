@@ -5,6 +5,8 @@ import { AdminCrud } from "@/components/AdminCrud";
 export const Route = createFileRoute("/_authenticated/admin/blog")({
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Blog Manager — Bernie Amponsah" },
       { name: "description", content: "Write, edit and publish journal articles." },
       { property: "og:title", content: "Blog Manager — Bernie Amponsah" },

@@ -8,6 +8,8 @@ export const Route = createFileRoute("/_authenticated/admin/portfolio")({
   }),
   head: () => ({
     meta: [
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:type", content: "website" },
       { title: "Portfolio Manager — Bernie Amponsah" },
       { name: "description", content: "Create, edit and publish portfolio projects." },
       { property: "og:title", content: "Portfolio Manager — Bernie Amponsah" },
