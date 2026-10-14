@@ -26,8 +26,8 @@ export function ProjectSlideshow({ images, title, compact = false }: { images: s
         </div>
       </div>
       {images.length > 1 && <>
-        <Button type="button" variant="outline" size="icon" aria-label="Previous image" title="Previous image" onClick={() => carousel?.scrollPrev()} className="absolute left-3 top-1/2 -translate-y-1/2 bg-background/90 text-on-surface border-outline-variant"><ChevronLeft /></Button>
-        <Button type="button" variant="outline" size="icon" aria-label="Next image" title="Next image" onClick={() => carousel?.scrollNext()} className="absolute right-3 top-1/2 -translate-y-1/2 bg-background/90 text-on-surface border-outline-variant"><ChevronRight /></Button>
+        <Button type="button" variant="outline" size="icon" disabled={!carousel} aria-label="Previous image" title="Previous image" onClick={() => carousel?.scrollPrev()} className="absolute left-3 top-1/2 -translate-y-1/2 bg-background/90 text-on-surface border-outline-variant"><ChevronLeft /></Button>
+        <Button type="button" variant="outline" size="icon" disabled={!carousel} aria-label="Next image" title="Next image" onClick={() => carousel?.scrollNext()} className="absolute right-3 top-1/2 -translate-y-1/2 bg-background/90 text-on-surface border-outline-variant"><ChevronRight /></Button>
         <div aria-live="polite" aria-atomic="true" className="absolute bottom-3 right-3 rounded-md bg-background/90 px-3 py-1 text-sm text-on-surface">{selected + 1} / {images.length}</div>
       </>}
     </section>
