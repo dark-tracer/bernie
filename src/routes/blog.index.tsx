@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageError } from "@/components/PageError";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Icon } from "@/components/Icon";
@@ -36,7 +37,7 @@ export const Route = createFileRoute("/blog/")({
     };
   },
   component: Blog,
-  errorComponent: () => <p className="p-12 text-on-surface">Content could not be loaded.</p>,
+  errorComponent: ({ error }) => <PageError title="The Blog could not load" error={error} />,
 });
 
 function formatDate(value: string) {

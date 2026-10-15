@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { PageError } from "@/components/PageError";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Icon } from "@/components/Icon";
@@ -28,7 +29,7 @@ export const Route = createFileRoute("/about")({
       ] : []),
     ],
   }),
-  errorComponent: () => <p className="p-10 text-on-surface">Could not load this page.</p>,
+  errorComponent: ({ error }) => <PageError title="The About page could not load" error={error} />,
   notFoundComponent: () => <p className="p-10 text-on-surface">Page not found.</p>,
   component: About,
 });

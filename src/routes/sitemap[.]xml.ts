@@ -24,7 +24,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         ];
 
         try {
-          const db = publicDb();
+          const db = await publicDb();
           const [projects, posts] = await Promise.all([
             db.from("projects").select("slug").eq("status", "published"),
             db.from("posts").select("slug").eq("status", "published"),

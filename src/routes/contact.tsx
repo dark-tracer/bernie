@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { PageError } from "@/components/PageError";
 import { useState } from "react";
 import { toast } from "sonner";
 import { SiteNav } from "@/components/SiteNav";
@@ -26,7 +27,7 @@ export const Route = createFileRoute("/contact")({
     ],
   }),
   component: Contact,
-  errorComponent: () => <p className="p-12 text-on-surface">This page could not be loaded.</p>,
+  errorComponent: ({ error }) => <PageError title="The Contact page could not load" error={error} />,
 });
 
 function Contact() {
