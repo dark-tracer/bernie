@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { PageError } from "@/components/PageError";
 import { useState } from "react";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -35,7 +36,7 @@ export const Route = createFileRoute("/portfolio/")({
     };
   },
   component: Portfolio,
-  errorComponent: () => <p className="p-12 text-on-surface">Projects could not be loaded.</p>,
+  errorComponent: ({ error }) => <PageError title="Projects could not load" error={error} />,
 });
 
 function Portfolio() {

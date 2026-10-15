@@ -11,3 +11,4 @@
 
 - Project slideshows use the existing cover plus an ordered gallery_images array; use the shared Embla slideshow on listing and detail views so navigation and touch behavior stay consistent.
 - Gallery editing uses the existing admin-only media upload path and saves image order with the project, preserving the current publication and access rules.
+- Server code reads Supabase env only via src/lib/server-env.server.ts inside handlers; why: Cloudflare Workers inject env per request.
