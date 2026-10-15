@@ -8,6 +8,13 @@
       "when": 1791953803052,
       "tag": "0000_add_project_slideshow_images",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792061322429,
+      "tag": "0001_media_public_read",
+      "breakpoints": true
     }
   ]
 }
