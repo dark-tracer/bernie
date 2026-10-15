@@ -1,0 +1,16 @@
+{
+  // Used by `npx wrangler deploy` after `npm run build` (Nitro cloudflare-module output).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bernie",
+  "main": ".output/server/index.mjs",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "directory": ".output/public", "binding": "ASSETS" },
+  "observability": { "enabled": true },
+  // Set SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, SUPABASE_PROJECT_ID here or as Worker variables/secrets.
+  "vars": {
+    "SUPABASE_URL": "https://xogzvthqrtrofatwtpmi.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_ZzPPVgQ8PMReenkKCTfhfA_FXWakXdV",
+    "SUPABASE_PROJECT_ID": "xogzvthqrtrofatwtpmi"
+  }
+}
